@@ -8,6 +8,7 @@ import pairmatching.dto.PairsDto;
 public class OutputView {
 
     public void printCourseLevelMission() {
+        System.out.println();
         System.out.println("#############################################");
         printCourse();
         printMissions();
@@ -49,6 +50,7 @@ public class OutputView {
     }
 
     public void printMatchResult(PairsDto pairsDto) {
+        System.out.println();
         System.out.println("페어 매칭 결과입니다.");
         System.out.println(pairsDto.toString());
     }
