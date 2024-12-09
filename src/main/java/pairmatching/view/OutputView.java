@@ -56,4 +56,8 @@ public class OutputView {
     public void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
     }
+
+    public void printInitializeMessage() {
+        System.out.println("초기화 되었습니다.");
+    }
 }

@@ -90,4 +90,8 @@ public class PairService {
 
         throw new IllegalArgumentException(ErrorMessage.NO_PAIR_ERROR.getErrorMessage());
     }
+
+    public void initializePairs() {
+        this.createdPairs = new ArrayList<>();
+    }
 }

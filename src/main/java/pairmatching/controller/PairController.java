@@ -46,6 +46,12 @@ public class PairController {
             inputProcessor.continueUntilNormalInput(this::processPairCheck, outputView::printErrorMessage);
             return;
         }
+
+        if (command.equals(SelectCommand.PAIR_INITIALIZATION)) {
+            pairService.initializePairs();
+            outputView.printInitializeMessage();
+            return;
+        }
     }
 
     private void processPairMatching() {
