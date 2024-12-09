@@ -3,6 +3,7 @@ package pairmatching.view;
 import pairmatching.constant.Course;
 import pairmatching.constant.Level;
 import pairmatching.constant.Mission;
+import pairmatching.dto.PairsDto;
 
 public class OutputView {
 
@@ -45,5 +46,9 @@ public class OutputView {
             missionOutput = missionOutput.substring(0, missionOutput.length() - 3);
         }
         System.out.println(missionOutput);
+    }
+
+    public void printMatchResult(PairsDto pairsDto) {
+        System.out.println(pairsDto.toString());
     }
 }

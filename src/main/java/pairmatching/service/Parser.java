@@ -29,7 +29,7 @@ public class Parser {
     private static String parse(String courseLevelMissionInput, int index) {
         try {
             String[] input = courseLevelMissionInput.split(",");
-            return input[index];
+            return input[index].trim();
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_FORMAT_ERROR.getErrorMessage());
         }

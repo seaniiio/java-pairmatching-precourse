@@ -1,6 +1,7 @@
 package pairmatching.controller;
 
 import pairmatching.constant.SelectCommand;
+import pairmatching.dto.PairsDto;
 import pairmatching.service.PairService;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -30,7 +31,6 @@ public class PairController {
     private void processByCommand(SelectCommand command) {
         if (command.equals(SelectCommand.PAIR_MATCHING)) {
             processPairMatching();
-            pairService.pairMatching(inputView.CourseLevelMissionInput());
             return;
         }
 
@@ -38,5 +38,7 @@ public class PairController {
 
     private void processPairMatching() {
         outputView.printCourseLevelMission();
+        PairsDto pairsDto = pairService.pairMatching(inputView.CourseLevelMissionInput());
+        outputView.printMatchResult(pairsDto);
     }
 }
