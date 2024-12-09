@@ -20,6 +20,15 @@ public enum Mission {
         this.level = level;
     }
 
+    public static Mission find(String missionName) {
+        for (Mission mission : Mission.values()) {
+            if (mission.name.equals(missionName)) {
+                return mission;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.MISSION_NOT_EXIST_ERROR.getErrorMessage());
+    }
+
     public Level getLevel() {
         return this.level;
     }

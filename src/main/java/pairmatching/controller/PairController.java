@@ -30,6 +30,7 @@ public class PairController {
     private void processByCommand(SelectCommand command) {
         if (command.equals(SelectCommand.PAIR_MATCHING)) {
             processPairMatching();
+            pairService.pairMatching(inputView.CourseLevelMissionInput());
             return;
         }
 

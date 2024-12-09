@@ -14,4 +14,13 @@ public enum Course {
     public String getName() {
         return this.name;
     }
+
+    public static Course find(String courseName) {
+        for (Course course : Course.values()) {
+            if (course.getName().equals(courseName)) {
+                return course;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.COURSE_NOT_EXIST_ERROR.getErrorMessage());
+    }
 }

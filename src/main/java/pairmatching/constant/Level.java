@@ -16,4 +16,13 @@ public enum Level {
     public String getName() {
         return this.name;
     }
+
+    public static Level find(String levelName) {
+        for (Level level : Level.values()) {
+            if (level.getName().equals(levelName)) {
+                return level;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.LEVEL_NOT_EXIST_ERROR.getErrorMessage());
+    }
 }
