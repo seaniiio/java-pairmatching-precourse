@@ -7,7 +7,8 @@ public enum ErrorMessage {
     LEVEL_NOT_EXIST_ERROR("레벨이 존재하지 않습니다."),
     COURSE_NOT_EXIST_ERROR("과정이 존재하지 않습니다."),
     MATCHING_FAIL_ERROR("페어 매칭에 실패했습니다."),
-    YES_OR_NO_INPUT_ERROR("네 / 아니오만 입력해주세요.");
+    YES_OR_NO_INPUT_ERROR("네 / 아니오만 입력해주세요."),
+    NO_PAIR_ERROR("입력에 대한 페어가 존재하지 않습니다.");
 
     private static final String PREFIX = "[ERROR] ";
     private final String errorMessage;

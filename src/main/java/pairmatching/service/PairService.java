@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import pairmatching.constant.Course;
+import pairmatching.constant.ErrorMessage;
 import pairmatching.constant.Level;
 import pairmatching.constant.Mission;
 import pairmatching.domain.Crews;
@@ -58,5 +59,35 @@ public class PairService {
         Pairs matchedPairs = pairMaker.pairMatch(course, level, mission, crews.get(course), createdPairs);
         this.createdPairs.add(matchedPairs);
         return new PairsDto(matchedPairs.getPairs());
+    }
+
+    public PairsDto rematch(String courseLevelMissionInput) {
+        Course course = Parser.parseCourse(courseLevelMissionInput);
+        Level level = Parser.parseLevel(courseLevelMissionInput);
+        Mission mission = Parser.parseMission(courseLevelMissionInput);
+
+        Pairs matchedPairs = pairMaker.pairMatch(course, level, mission, crews.get(course), createdPairs);
+        // 바꿔치기
+        for (Pairs createdPair : createdPairs) {
+            if (createdPair.isExistingPairs(course, level, mission)) {
+                createdPair.swapPairs(matchedPairs);
+            }
+        }
+
+        return new PairsDto(matchedPairs.getPairs());
+    }
+
+    public PairsDto checkPair(String courseLevelMissionInput) {
+        Course course = Parser.parseCourse(courseLevelMissionInput);
+        Level level = Parser.parseLevel(courseLevelMissionInput);
+        Mission mission = Parser.parseMission(courseLevelMissionInput);
+
+        for (Pairs createdPair : createdPairs) {
+            if (createdPair.isExistingPairs(course, level, mission)) {
+                return new PairsDto(createdPair.getPairs());
+            }
+        }
+
+        throw new IllegalArgumentException(ErrorMessage.NO_PAIR_ERROR.getErrorMessage());
     }
 }

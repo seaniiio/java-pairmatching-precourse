@@ -42,6 +42,10 @@ public class PairController {
             return;
         }
 
+        if (command.equals(SelectCommand.PAIR_CHECK)) {
+            inputProcessor.continueUntilNormalInput(this::processPairCheck, outputView::printErrorMessage);
+            return;
+        }
     }
 
     private void processPairMatching() {
@@ -58,11 +62,19 @@ public class PairController {
         outputView.printMatchResult(pairsDto);
     }
 
+    private void processPairCheck() {
+        outputView.printCourseLevelMission();
+        String input = inputProcessor.continueUntilNormalInput(inputView::courseLevelMissionInput,
+                outputView::printErrorMessage);
+        PairsDto pairsDto = pairService.checkPair(input);
+        outputView.printMatchResult(pairsDto);
+    }
+
     private void processExistingPairProcess(String input) {
         // 이미 매칭 정보가 존재하는 경우, 재매칭 or 과정레벨미션 다시선택
         YesNoCommand yesOrNoInput = inputProcessor.continueUntilNormalInput(this::processYesOrNoInputProcess, outputView::printErrorMessage);
         if (yesOrNoInput.equals(YesNoCommand.YES)) {
-            PairsDto pairsDto = pairService.pairMatching(input);
+            PairsDto pairsDto = pairService.rematch(input);
             outputView.printMatchResult(pairsDto);
         }
 

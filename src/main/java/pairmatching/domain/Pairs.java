@@ -46,4 +46,8 @@ public class Pairs {
     public boolean isExistingPairs(Course course, Level level, Mission mission) {
         return this.course.equals(course) && this.level.equals(level) && this.mission.equals(mission);
     }
+
+    public void swapPairs(Pairs matchedPairs) {
+        this.pairs = matchedPairs.getPairs();
+    }
 }
