@@ -28,7 +28,7 @@ public class Pairs {
         return this.level.equals(level);
     }
 
-    public boolean isExistingPair(Pairs newPairs) {
+    public boolean isDuplicatedPair(Pairs newPairs) {
         for (Pair newPair : newPairs.pairs) {
             for (Pair pair : this.pairs) {
                 if (pair.contains(newPair)) {
@@ -41,5 +41,9 @@ public class Pairs {
 
     public List<Pair> getPairs() {
         return new ArrayList<>(this.pairs);
+    }
+
+    public boolean isExistingPairs(Course course, Level level, Mission mission) {
+        return this.course.equals(course) && this.level.equals(level) && this.mission.equals(mission);
     }
 }

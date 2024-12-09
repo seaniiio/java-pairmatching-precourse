@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Crews {
 
-    private List<Crew> crews;
+    private List<String> crews;
 
-    public Crews(List<Crew> crews) {
+    public Crews(List<String> crews) {
         this.crews = crews;
     }
 
@@ -16,7 +16,7 @@ public class Crews {
         this.crews = Randoms.shuffle(crews);
     }
 
-    public List<Crew> matchCrew(int startIndex, int endIndex) {
+    public List<String> matchCrew(int startIndex, int endIndex) {
         return new ArrayList<>(this.crews.subList(startIndex, endIndex));
     }
 

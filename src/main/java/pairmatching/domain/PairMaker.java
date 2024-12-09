@@ -54,7 +54,7 @@ public class PairMaker {
 
     private boolean isExistingPairs(Pairs newPairs, List<Pairs> createdPairs) {
         for (Pairs createdPair : createdPairs) {
-            if (createdPair.isExistingPair(newPairs)) {
+            if (createdPair.isDuplicatedPair(newPairs)) {
                 return true;
             }
         }

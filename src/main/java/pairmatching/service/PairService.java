@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import pairmatching.constant.Course;
 import pairmatching.constant.Level;
 import pairmatching.constant.Mission;
-import pairmatching.domain.Crew;
 import pairmatching.domain.Crews;
 import pairmatching.domain.PairMaker;
 import pairmatching.domain.Pairs;
@@ -23,13 +22,13 @@ public class PairService {
     public PairService(final PairMaker pairMaker) {
         Map<Course, Crews> crews = new LinkedHashMap<>();
 
-        List<Crew> frontendCrews = Reader.readFrontendCrew().stream()
-                .map(Crew::new)
+        List<String> frontendCrews = Reader.readFrontendCrew().stream()
+                .map(String::new)
                 .collect(Collectors.toList());
         crews.put(Course.FRONTEND, new Crews(frontendCrews));
 
-        List<Crew> backendCrews = Reader.readBackendCrew().stream()
-                .map(Crew::new)
+        List<String> backendCrews = Reader.readBackendCrew().stream()
+                .map(String::new)
                 .collect(Collectors.toList());
         crews.put(Course.BACKEND, new Crews(backendCrews));
 
@@ -38,12 +37,26 @@ public class PairService {
         this.createdPairs = new ArrayList<>();
     }
 
+    public boolean checkPairExist(String courseLevelMissionInput) {
+        Course course = Parser.parseCourse(courseLevelMissionInput);
+        Level level = Parser.parseLevel(courseLevelMissionInput);
+        Mission mission = Parser.parseMission(courseLevelMissionInput);
+
+        for (Pairs createdPair : createdPairs) {
+            if (createdPair.isExistingPairs(course, level, mission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public PairsDto pairMatching(String courseLevelMissionInput) {
         Course course = Parser.parseCourse(courseLevelMissionInput);
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
         Pairs matchedPairs = pairMaker.pairMatch(course, level, mission, crews.get(course), createdPairs);
+        this.createdPairs.add(matchedPairs);
         return new PairsDto(matchedPairs.getPairs());
     }
 }

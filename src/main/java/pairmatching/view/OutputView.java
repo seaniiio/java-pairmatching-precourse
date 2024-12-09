@@ -49,6 +49,11 @@ public class OutputView {
     }
 
     public void printMatchResult(PairsDto pairsDto) {
+        System.out.println("페어 매칭 결과입니다.");
         System.out.println(pairsDto.toString());
+    }
+
+    public void printErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
     }
 }

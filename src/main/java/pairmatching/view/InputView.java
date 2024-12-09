@@ -14,10 +14,15 @@ public class InputView {
         return selectInput;
     }
 
-    public String CourseLevelMissionInput() {
+    public String courseLevelMissionInput() {
         System.out.println("과정, 레벨, 미션을 선택하세요.");
         System.out.println("ex) 백엔드, 레벨1, 자동차경주");
         String input = Console.readLine();
         return input;
+    }
+
+    public String rematchInput() {
+        System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
+        return Console.readLine();
     }
 }
