@@ -29,6 +29,7 @@ public class Pairs {
     }
 
     public boolean isDuplicatedPair(Pairs newPairs) {
+
         for (Pair newPair : newPairs.pairs) {
             for (Pair pair : this.pairs) {
                 if (pair.contains(newPair)) {

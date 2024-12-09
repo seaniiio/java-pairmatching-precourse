@@ -45,7 +45,7 @@ public class PairMaker {
     private List<Pairs> findSameLevelPairs(Level level, List<Pairs> createdPairs) {
         List<Pairs> sameLevelPairs = new ArrayList<>();
         for (Pairs createdPair : createdPairs) {
-            if (createdPair.isLevel(level)) { // 레벨이 같은 페어들에 대해 같이 매칭된사람이 없어야 함
+            if (createdPair.isLevel(level)) {
                 sameLevelPairs.add(createdPair);
             }
         }
@@ -53,6 +53,7 @@ public class PairMaker {
     }
 
     private boolean isExistingPairs(Pairs newPairs, List<Pairs> createdPairs) {
+        System.out.println("PairMaker.isExistingPairs");
         for (Pairs createdPair : createdPairs) {
             if (createdPair.isDuplicatedPair(newPairs)) {
                 return true;

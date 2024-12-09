@@ -11,7 +11,13 @@ public class Pair {
     }
 
     public boolean contains(Pair newPair) {
-        return this.pairMembers.contains(newPair.getPairMembers());
+        boolean isContaining = true;
+        for (String pairMember : newPair.getPairMembers()) {
+            if (!this.pairMembers.contains(pairMember)) {
+                isContaining = false;
+            }
+        }
+        return isContaining;
     }
 
     public String toString() {
