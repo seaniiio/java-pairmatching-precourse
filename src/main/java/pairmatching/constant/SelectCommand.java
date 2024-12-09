@@ -21,4 +21,8 @@ public enum SelectCommand {
         }
         throw new IllegalArgumentException(ErrorMessage.COMMAND_NOT_EXIST_ERROR.getErrorMessage());
     }
+
+    public boolean equals(SelectCommand command) {
+        return this.command.equals(command.command);
+    }
 }
