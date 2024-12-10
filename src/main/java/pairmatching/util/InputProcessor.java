@@ -2,7 +2,6 @@ package pairmatching.util;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import pairmatching.constant.SelectCommand;
 
 public class InputProcessor {
 
@@ -23,14 +22,6 @@ public class InputProcessor {
                 return processInput.get();
             } catch (IllegalArgumentException e) {
                 processIfErrorOccur.accept(e.getMessage());
-            }
-        }
-    }
-
-    public static void continueUntilQuit(Supplier<SelectCommand> processInput) {
-        while (true) {
-            if (processInput.get().equals(SelectCommand.QUIT)) {
-                break;
             }
         }
     }

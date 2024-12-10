@@ -1,4 +1,4 @@
-package pairmatching.service;
+package pairmatching.util;
 
 import pairmatching.constant.Course;
 import pairmatching.constant.ErrorMessage;

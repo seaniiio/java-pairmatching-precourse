@@ -1,7 +1,9 @@
 package pairmatching.config;
 
-import pairmatching.util.InputProcessor;
-import pairmatching.controller.PairController;
+import pairmatching.controller.CheckController;
+import pairmatching.controller.InitializeController;
+import pairmatching.controller.MainController;
+import pairmatching.controller.MatchController;
 import pairmatching.domain.PairMaker;
 import pairmatching.service.PairService;
 import pairmatching.view.InputView;
@@ -9,8 +11,20 @@ import pairmatching.view.OutputView;
 
 public class AppConfig {
 
-    public PairController pairController() {
-        return new PairController(inputView(), outputView(), pairService());
+    public MainController mainController() {
+        return new MainController(matchController(), checkController(), initializeController(), inputView(), outputView());
+    }
+
+    private MatchController matchController() {
+        return new MatchController(inputView(), outputView(), pairService());
+    }
+
+    private CheckController checkController() {
+        return new CheckController(inputView(), outputView(), pairService());
+    }
+
+    private InitializeController initializeController() {
+        return new InitializeController(outputView(), pairService());
     }
 
     private InputView inputView() {
