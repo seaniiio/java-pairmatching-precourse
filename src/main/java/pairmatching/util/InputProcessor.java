@@ -1,4 +1,4 @@
-package pairmatching.controller;
+package pairmatching.util;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -6,7 +6,7 @@ import pairmatching.constant.SelectCommand;
 
 public class InputProcessor {
 
-    public void continueUntilNormalInput(Runnable processInput, Consumer<String> processIfErrorOccur) {
+    public static void continueUntilNormalInput(Runnable processInput, Consumer<String> processIfErrorOccur) {
         while (true) {
             try {
                 processInput.run();
@@ -17,7 +17,7 @@ public class InputProcessor {
         }
     }
 
-    public <T> T continueUntilNormalInput(Supplier<T> processInput, Consumer<String> processIfErrorOccur) {
+    public static <T> T continueUntilNormalInput(Supplier<T> processInput, Consumer<String> processIfErrorOccur) {
         while (true) {
             try {
                 return processInput.get();
@@ -27,7 +27,7 @@ public class InputProcessor {
         }
     }
 
-    public void continueUntilQuit(Supplier<SelectCommand> processInput) {
+    public static void continueUntilQuit(Supplier<SelectCommand> processInput) {
         while (true) {
             if (processInput.get().equals(SelectCommand.QUIT)) {
                 break;

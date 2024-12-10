@@ -1,6 +1,6 @@
 package pairmatching.config;
 
-import pairmatching.controller.InputProcessor;
+import pairmatching.util.InputProcessor;
 import pairmatching.controller.PairController;
 import pairmatching.domain.PairMaker;
 import pairmatching.service.PairService;
@@ -10,7 +10,7 @@ import pairmatching.view.OutputView;
 public class AppConfig {
 
     public PairController pairController() {
-        return new PairController(inputView(), outputView(), pairService(), inputProcessor());
+        return new PairController(inputView(), outputView(), pairService());
     }
 
     private InputView inputView() {
@@ -23,10 +23,6 @@ public class AppConfig {
 
     private PairService pairService() {
         return new PairService(pairMaker());
-    }
-
-    private InputProcessor inputProcessor() {
-        return new InputProcessor();
     }
 
     private PairMaker pairMaker() {
