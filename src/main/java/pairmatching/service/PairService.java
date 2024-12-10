@@ -11,7 +11,6 @@ import pairmatching.util.Parser;
 
 public class PairService {
 
-    private static final CrewRepository crewRepository = CrewRepository.getInstance();
     private static final PairRepository pairRepository = PairRepository.getInstance();
 
     public void initializeCrew() {
@@ -31,7 +30,7 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        return new PairsDto(pairRepository.pairMatch(course, level, mission, crewRepository.findCrewsByCourse(course)));
+        return new PairsDto(pairRepository.pairMatch(course, level, mission));
     }
 
     public PairsDto rematch(String courseLevelMissionInput) {
@@ -39,7 +38,7 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        Pairs rematchedPairs = pairRepository.rematch(course, level, mission, crewRepository.findCrewsByCourse(course));
+        Pairs rematchedPairs = pairRepository.rematch(course, level, mission);
         return new PairsDto(rematchedPairs);
     }
 

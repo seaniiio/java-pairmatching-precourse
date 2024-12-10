@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Pair {
 
-    private final List<String> pairMembers;
+    private final List<Crew> pairMembers;
 
-    public Pair(List<String> pairMembers) {
+    public Pair(List<Crew> pairMembers) {
         this.pairMembers = pairMembers;
     }
 
     public boolean contains(Pair newPair) {
         boolean isContaining = true;
-        for (String pairMember : newPair.getPairMembers()) {
+        for (Crew pairMember : newPair.getPairMembers()) {
             if (!this.pairMembers.contains(pairMember)) {
                 isContaining = false;
             }
@@ -22,13 +22,13 @@ public class Pair {
 
     public String toString() {
         String crewInformation = "";
-        for (String pairMember : pairMembers) {
+        for (Object pairMember : pairMembers) {
             crewInformation += (pairMember + " : ");
         }
         return crewInformation.substring(0, crewInformation.length()-3);
     }
 
-    private List<String> getPairMembers() {
+    private List<Crew> getPairMembers() {
         return this.pairMembers;
     }
 }
