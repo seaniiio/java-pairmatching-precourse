@@ -4,7 +4,6 @@ import pairmatching.controller.CheckController;
 import pairmatching.controller.InitializeController;
 import pairmatching.controller.MainController;
 import pairmatching.controller.MatchController;
-import pairmatching.domain.PairMaker;
 import pairmatching.service.PairService;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -12,7 +11,7 @@ import pairmatching.view.OutputView;
 public class AppConfig {
 
     public MainController mainController() {
-        return new MainController(matchController(), checkController(), initializeController(), inputView(), outputView());
+        return new MainController(matchController(), checkController(), initializeController(), inputView(), outputView(), pairService());
     }
 
     private MatchController matchController() {
@@ -36,10 +35,6 @@ public class AppConfig {
     }
 
     private PairService pairService() {
-        return new PairService(pairMaker());
-    }
-
-    private PairMaker pairMaker() {
-        return new PairMaker();
+        return new PairService();
     }
 }

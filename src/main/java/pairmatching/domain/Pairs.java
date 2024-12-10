@@ -2,9 +2,6 @@ package pairmatching.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import pairmatching.constant.Course;
-import pairmatching.constant.Level;
-import pairmatching.constant.Mission;
 
 public class Pairs {
 

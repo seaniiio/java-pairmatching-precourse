@@ -1,4 +1,6 @@
-package pairmatching.constant;
+package pairmatching.domain;
+
+import pairmatching.constant.ErrorMessage;
 
 public enum Course {
 

@@ -1,4 +1,6 @@
-package pairmatching.constant;
+package pairmatching.domain;
+
+import pairmatching.constant.ErrorMessage;
 
 public enum Mission {
     RACING_CAR_GAME("자동차경주", Level.LEVEL1),

@@ -1,9 +1,9 @@
 package pairmatching.util;
 
-import pairmatching.constant.Course;
+import pairmatching.domain.Course;
 import pairmatching.constant.ErrorMessage;
-import pairmatching.constant.Level;
-import pairmatching.constant.Mission;
+import pairmatching.domain.Level;
+import pairmatching.domain.Mission;
 
 public class Parser {
 

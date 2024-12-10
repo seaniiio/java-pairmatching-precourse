@@ -1,42 +1,21 @@
 package pairmatching.service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import pairmatching.constant.Course;
-import pairmatching.constant.ErrorMessage;
-import pairmatching.constant.Level;
-import pairmatching.constant.Mission;
-import pairmatching.domain.Crews;
-import pairmatching.domain.PairMaker;
+import pairmatching.domain.Course;
+import pairmatching.domain.Level;
+import pairmatching.domain.Mission;
 import pairmatching.domain.Pairs;
 import pairmatching.dto.PairsDto;
+import pairmatching.repository.CrewRepository;
+import pairmatching.repository.PairRepository;
 import pairmatching.util.Parser;
 
 public class PairService {
 
-    private final Map<Course, Crews> crews;
-    private final PairMaker pairMaker;
-    private List<Pairs> createdPairs;
+    private static final CrewRepository crewRepository = CrewRepository.getInstance();
+    private static final PairRepository pairRepository = PairRepository.getInstance();
 
-    public PairService(final PairMaker pairMaker) {
-        Map<Course, Crews> crews = new LinkedHashMap<>();
-
-        List<String> frontendCrews = Reader.readFrontendCrew().stream()
-                .map(String::new)
-                .collect(Collectors.toList());
-        crews.put(Course.FRONTEND, new Crews(frontendCrews));
-
-        List<String> backendCrews = Reader.readBackendCrew().stream()
-                .map(String::new)
-                .collect(Collectors.toList());
-        crews.put(Course.BACKEND, new Crews(backendCrews));
-
-        this.crews = crews;
-        this.pairMaker = pairMaker;
-        this.createdPairs = new ArrayList<>();
+    public void initializeCrew() {
+        CrewRepository.initializeCrew();
     }
 
     public boolean checkPairExist(String courseLevelMissionInput) {
@@ -44,12 +23,7 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        for (Pairs createdPair : createdPairs) {
-            if (createdPair.isExistingPairs(course, level, mission)) {
-                return true;
-            }
-        }
-        return false;
+        return pairRepository.checkPairExist(course, level, mission);
     }
 
     public PairsDto pairMatching(String courseLevelMissionInput) {
@@ -57,9 +31,7 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        Pairs matchedPairs = pairMaker.pairMatch(course, level, mission, crews.get(course), createdPairs);
-        this.createdPairs.add(matchedPairs);
-        return new PairsDto(matchedPairs.getPairs());
+        return new PairsDto(pairRepository.pairMatch(course, level, mission, crewRepository.findCrewsByCourse(course)));
     }
 
     public PairsDto rematch(String courseLevelMissionInput) {
@@ -67,15 +39,8 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        Pairs matchedPairs = pairMaker.pairMatch(course, level, mission, crews.get(course), createdPairs);
-        // 바꿔치기
-        for (Pairs createdPair : createdPairs) {
-            if (createdPair.isExistingPairs(course, level, mission)) {
-                createdPair.swapPairs(matchedPairs);
-            }
-        }
-
-        return new PairsDto(matchedPairs.getPairs());
+        Pairs rematchedPairs = pairRepository.rematch(course, level, mission, crewRepository.findCrewsByCourse(course));
+        return new PairsDto(rematchedPairs);
     }
 
     public PairsDto checkPair(String courseLevelMissionInput) {
@@ -83,16 +48,10 @@ public class PairService {
         Level level = Parser.parseLevel(courseLevelMissionInput);
         Mission mission = Parser.parseMission(courseLevelMissionInput);
 
-        for (Pairs createdPair : createdPairs) {
-            if (createdPair.isExistingPairs(course, level, mission)) {
-                return new PairsDto(createdPair.getPairs());
-            }
-        }
-
-        throw new IllegalArgumentException(ErrorMessage.NO_PAIR_ERROR.getErrorMessage());
+        return new PairsDto(pairRepository.find(course, level, mission));
     }
 
     public void initializePairs() {
-        this.createdPairs = new ArrayList<>();
+        pairRepository.initializePairs();
     }
 }

@@ -1,8 +1,8 @@
 package pairmatching.view;
 
-import pairmatching.constant.Course;
-import pairmatching.constant.Level;
-import pairmatching.constant.Mission;
+import pairmatching.domain.Course;
+import pairmatching.domain.Level;
+import pairmatching.domain.Mission;
 import pairmatching.dto.PairsDto;
 
 public class OutputView {
